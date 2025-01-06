@@ -18,7 +18,7 @@
         </div>
         <div id="password-display" style="margin-top: 20px;">
             <span id="generated-password" style="flex: 1; font-size: 24px; font-weight: bold;">Genera tu contraseña aquí</span>
-            <img id="copy-button" src="img/guardado.png" alt="Copiar Contraseña" style="width: 30px; height: 30px; cursor: pointer; display: none;" onclick="copyPassword()">
+            <img id="copy-button" src="guardado.png" alt="Copiar Contraseña" style="width: 30px; height: 30px; cursor: pointer; display: none;" onclick="copyPassword()">
         </div>
         <div class="buttons">
             <button onclick="window.location.href='index.html'">Regresar al Inicio</button>
@@ -31,7 +31,7 @@
     <script>
         function generateSimplePassword() {
             const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&';
-            const passwordLength = document.getElementById('password-length').value; // Obtener la longitud desde el input
+            const passwordLength = document.getElementById('password-length').value;
             
             if (passwordLength < 8) {
                 alert('La longitud mínima es 8 caracteres');
@@ -44,13 +44,11 @@
                 password += characters[randomIndex];
             }
 
-            // Mostrar la contraseña generada
             const passwordSpan = document.getElementById('generated-password');
             passwordSpan.textContent = password;
 
-            // Mostrar el botón de copiado
             const copyButton = document.getElementById('copy-button');
-            copyButton.style.display = 'inline'; // Hacer visible el ícono
+            copyButton.style.display = 'inline'; 
         }
 
         function copyPassword() {
