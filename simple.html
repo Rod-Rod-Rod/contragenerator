@@ -28,19 +28,17 @@
         function generateSimplePassword() {
             const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&';
             let password = '';
-            const passwordLength = 10; // Longitud de la contraseña
+            const passwordLength = 8;
             for (let i = 0; i < passwordLength; i++) {
                 const randomIndex = Math.floor(Math.random() * characters.length);
                 password += characters[randomIndex];
             }
 
-            // Mostrar la contraseña generada
             const passwordSpan = document.getElementById('generated-password');
             passwordSpan.textContent = password;
 
-            // Mostrar el botón de copiado
             const copyButton = document.getElementById('copy-button');
-            copyButton.style.display = 'inline'; // Hacer visible el ícono
+            copyButton.style.display = 'inline';
         }
 
         function copyPassword() {
