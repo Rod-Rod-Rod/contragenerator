@@ -1,7 +1,6 @@
-/* Estilos generales */
 body {
     font-family: 'Helvetica Neue', sans-serif;
-    background-color: #E4FDE1; /* Color de fondo similar */
+    background-color: #E4FDE1;
     margin: 0;
     padding: 0;
     display: flex;
@@ -25,12 +24,12 @@ body {
 
 h1 {
     font-size: 48px;
-    color: #AD2E24; /* Color para el título */
+    color: #AD2E24; 
     margin-bottom: 20px;
 }
 
 button {
-    background-color: #C75146; /* Color de los botones */
+    background-color: #C75146; 
     color: white;
     border: none;
     font-size: 20px;
@@ -44,7 +43,7 @@ button {
 }
 
 button:hover {
-    background-color: #EA8C55; /* Color de hover para los botones */
+    background-color: #EA8C55;
     transform: scale(1.05);
 }
 
@@ -77,7 +76,7 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Para pantallas pequeñas */
+
 @media (max-width: 768px) {
     .container {
         width: 90%;
