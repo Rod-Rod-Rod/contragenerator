@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contraseña con un dato personalizado</title>
+    <link rel="stylesheet" href="contras.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Contraseña con un dato personalizado</h1>
+        <div>
+            <label for="data-type">Selecciona un tipo de dato:</label>
+            <select id="data-type">
+                <option value="nombre">Nombre</option>
+                <option value="mascota">Mascota</option>
+                <option value="apellido">Apellido</option>
+                <option value="lugar">Lugar</option>
+                <option value="fecha">Fecha</option>
+                <option value="cosa">Cosa</option>
+            </select>
+        </div>
+        <div style="margin-top: 20px;">
+            <label for="input-data">Ingresa el valor:</label>
+            <input type="text" id="input-data" placeholder="Ingresa el dato">
+        </div>
+        <div style="margin-top: 20px;">
+            <button onclick="generateCustomPassword()">Generar Contraseña Personalizada</button>
+        </div>
+        <div id="password-display" style="margin-top: 20px;">
+            <span id="generated-password" style="flex: 1; font-size: 24px; font-weight: bold;">Genera tu contraseña aquí</span>
+            <img id="copy-button" src="img/guardado.png" alt="Copiar Contraseña" style="width: 30px; height: 30px; cursor: pointer; display: none;" onclick="copyPassword()">
+        </div>
+        <div class="buttons">
+            <button onclick="window.location.href='index.html'">Regresar al Inicio</button>
+        </div>
+    </div>
+    <br>
+    <div class="info-creator">
+        <p><strong>Sobre el creador:</strong> Este sitio fue creado por <a href="https://www.linkedin.com/in/rodrigo-andrés-yalibat-del-cid-38667b323" target="_blank">Rodrigo Yalibat</a>, estudiante de Ingeniería en Sistemas, con el objetivo de facilitar la generación de contraseñas seguras.</p>
+    </div>
+    <script>
+        function generateCustomPassword() {
+            const dataType = document.getElementById('data-type').value;
+            let inputData = document.getElementById('input-data').value.trim();
+    
+            // Eliminar espacios y convertir a minúsculas para mejorar la seguridad
+            inputData = inputData.replace(/\s+/g, '').toLowerCase();
+    
+            if (!inputData) {
+                alert('Por favor, ingresa un valor para generar la contraseña.');
+                return;
+            }
+    
+            // Conjunto de caracteres especiales, letras mayúsculas y minúsculas
+            const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&';
+    
+            // Función para obtener un carácter aleatorio de una cadena
+            function getRandomCharacter(set) {
+                return set[Math.floor(Math.random() * set.length)];
+            }
+    
+            // Generar caracteres aleatorios para la contraseña desde el conjunto 'characters'
+            const randomUpperCase = getRandomCharacter(characters);
+            const randomNumber = getRandomCharacter(characters);
+            const randomSpecialChar = getRandomCharacter(characters);
+    
+            // Determinar en qué parte de la contraseña se va a colocar el dato
+            const positions = ['inicio', 'medio', 'final', 'espacio4', 'anagrama'];
+            const randomPosition = positions[Math.floor(Math.random() * positions.length)];
+    
+            let password = '';
+    
+            switch (randomPosition) {
+                case 'inicio':
+                    password = `${randomUpperCase}${randomNumber}${randomSpecialChar}${inputData}${randomSpecialChar}${randomNumber}`;
+                    break;
+                case 'medio':
+                    password = `${randomUpperCase}${randomNumber}${randomSpecialChar}${randomSpecialChar}${inputData}${randomSpecialChar}${randomNumber}`;
+                    break;
+                case 'final':
+                    password = `${randomUpperCase}${randomNumber}${randomSpecialChar}${randomNumber}${randomSpecialChar}${inputData}`;
+                    break;
+                case 'espacio4':
+                    password = `${randomNumber}${randomSpecialChar}${randomSpecialChar}${randomSpecialChar}${randomSpecialChar}${inputData}${randomSpecialChar}${randomNumber}`;
+                    break;
+                case 'anagrama':
+                    const shuffledData = inputData.split('').sort(() => Math.random() - 0.5).join('');
+                    password = `${randomNumber}${randomSpecialChar}${shuffledData}${randomSpecialChar}${randomUpperCase}`;
+                    break;
+            }
+    
+            // Mostrar la contraseña generada
+            const passwordSpan = document.getElementById('generated-password');
+            passwordSpan.textContent = password;
+    
+            // Mostrar el botón de copiado
+            const copyButton = document.getElementById('copy-button');
+            copyButton.style.display = 'inline'; // Hacer visible el ícono
+        }
+    
+        function copyPassword() {
+            const passwordText = document.getElementById('generated-password').textContent;
+            const textArea = document.createElement('textarea');
+            textArea.value = passwordText;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert('Contraseña copiada al portapapeles!');
+        }
+    </script>    
+</body>
+</html>

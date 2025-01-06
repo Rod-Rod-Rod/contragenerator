@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contraseña con longutud personalizado</title>
+    <link rel="stylesheet" href="contras.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Contraseña con longitud personalizado</h1>
+        <div>
+            <label for="password-length">Longitud de la Contraseña: </label>
+            <input type="number" id="password-length" min="8" />
+        </div>
+        <div>
+            <button onclick="generateSimplePassword()">Generar Contraseña Simple</button>
+        </div>
+        <div id="password-display" style="margin-top: 20px;">
+            <span id="generated-password" style="flex: 1; font-size: 24px; font-weight: bold;">Genera tu contraseña aquí</span>
+            <img id="copy-button" src="img/guardado.png" alt="Copiar Contraseña" style="width: 30px; height: 30px; cursor: pointer; display: none;" onclick="copyPassword()">
+        </div>
+        <div class="buttons">
+            <button onclick="window.location.href='index.html'">Regresar al Inicio</button>
+        </div>
+    </div>
+    <br>
+    <div class="info-creator">
+        <p><strong>Sobre el creador:</strong> Este sitio fue creado por <a href="https://www.linkedin.com/in/rodrigo-andrés-yalibat-del-cid-38667b323" target="_blank">Rodrigo Yalibat</a>, estudiante de Ingeniería en Sistemas, con el objetivo de facilitar la generación de contraseñas seguras.</p>
+    </div>
+    <script>
+        function generateSimplePassword() {
+            const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&';
+            const passwordLength = document.getElementById('password-length').value; // Obtener la longitud desde el input
+            
+            if (passwordLength < 8) {
+                alert('La longitud mínima es 8 caracteres');
+                return;
+            }
+
+            let password = '';
+            for (let i = 0; i < passwordLength; i++) {
+                const randomIndex = Math.floor(Math.random() * characters.length);
+                password += characters[randomIndex];
+            }
+
+            // Mostrar la contraseña generada
+            const passwordSpan = document.getElementById('generated-password');
+            passwordSpan.textContent = password;
+
+            // Mostrar el botón de copiado
+            const copyButton = document.getElementById('copy-button');
+            copyButton.style.display = 'inline'; // Hacer visible el ícono
+        }
+
+        function copyPassword() {
+            const passwordText = document.getElementById('generated-password').textContent;
+            const textArea = document.createElement('textarea');
+            textArea.value = passwordText;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert('Contraseña copiada al portapapeles!');
+        }
+    </script>
+</body>
+</html>
